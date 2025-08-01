@@ -3,8 +3,8 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
 
-    public string PromptMessage;
-    public void OnInteract()
+    public string promptMessage;
+    public void BaseInteract()
     {
         Interact();
     }
