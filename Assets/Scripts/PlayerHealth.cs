@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
+
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,8 +12,8 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 200f;
     public float chipSpeed = 3f;
 
-    public Image healthBar;
-    public Image healthBarBackground;
+    public UnityEngine.UI.Image healthBar;
+    public UnityEngine.UI.Image healthBarBackground;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,21 +25,51 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            TakeDamage(Random.Range(5f, 10f));
-        }
     }
 
     public void UpdateHealthUI()
     {
-                Debug.Log("Updating health UI");
+        Debug.Log("Updating health UI");
+        float FillF = healthBar.fillAmount;
+        float FillB = healthBarBackground.fillAmount;
+        float hFraction = health / maxHealth;
+
+        if (FillB > hFraction)
+        {
+            healthBar.fillAmount = hFraction;
+            healthBarBackground.color = Color.red;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = Mathf.Clamp01(percentComplete);
+            healthBarBackground.fillAmount = Mathf.Lerp(FillB, hFraction, percentComplete);
+        }
+        
+        else if (FillB < hFraction)
+        {
+            healthBar.fillAmount = hFraction;
+            healthBarBackground.color = Color.green;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = Mathf.Clamp01(percentComplete);
+            healthBarBackground.fillAmount = Mathf.Lerp(FillB, hFraction, percentComplete);
+            
+        }
+        else
+        {
+            healthBarBackground.color = Color.white;
+            healthBar.fillAmount = hFraction;
+        }
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        lerpTimer = 0f;
+        UpdateHealthUI();
+    }
+    public void Heal(float healAmount)
+    {
+        health += healAmount;
         lerpTimer = 0f;
         UpdateHealthUI();
     }

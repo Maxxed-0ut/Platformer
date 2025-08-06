@@ -768,6 +768,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "health",
+            "id": "575d443a-8242-4b2d-8edb-bd7bc8a749dd",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "d4612117-658a-4d98-a80e-1f815a83b09d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1723571f-6a5d-4289-a287-7b1df03f772f",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
