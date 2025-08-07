@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Helath Bar")]
     private float health;
     private float lerpTimer;
     public float maxHealth = 200f;
@@ -14,6 +15,9 @@ public class PlayerHealth : MonoBehaviour
 
     public UnityEngine.UI.Image healthBar;
     public UnityEngine.UI.Image healthBarBackground;
+    [Header("Damage Overlay")]
+    public UnityEngine.UI.Image overlay;
+    public float duration ;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
